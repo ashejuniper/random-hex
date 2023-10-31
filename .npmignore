@@ -1,0 +1,17 @@
+# Git
+.gitattributes
+
+# Downloaded packages
+node_modules/
+
+# Pre-compiled source code
+src/
+
+# Tests
+tests/
+
+# Minify config
+.minify.json
+
+# Output of `npm pack`
+*.tgz

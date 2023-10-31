@@ -1,0 +1,32 @@
+{
+  "name": "@ashejuniper/random-hex",
+  "version": "0.1.0",
+  "description": "Generate random strings of any length containing hexadecimal digits",
+  "main": "dist/RandomHex.min.js",
+  "scripts": {
+    "build": "minify src/RandomHex.js > dist/RandomHex.min.js",
+    "prepublishOnly": "bun run build || pnpm run build || yarn run build || npm run build",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashejuniper/random-hex.git"
+  },
+  "keywords": [
+    "random",
+    "hex",
+    "hexadecimal",
+    "string",
+    "color",
+    "code",
+    "codes",
+    "url",
+    "uri"
+  ],
+  "author": "Ashe Juniper <https://github.com/ashe-juniper>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/ashejuniper/random-hex/issues"
+  },
+  "homepage": "https://github.com/ashejuniper/random-hex#readme"
+}
