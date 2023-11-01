@@ -11,15 +11,23 @@ function u4() {
 }
 
 function u8() {
-    return (Math.round(Math.random() * 0xFF)).toString(16);
+    let result = (Math.round(Math.random() * 0xFF)).toString(16);
+
+    if (
+        result.length < 2
+    ) {
+        result = `0${result}`;
+    }
+
+    return result;
 }
 
 function u16() {
-    return (Math.round(Math.random() * 0xFF_FF)).toString(16);
+    return `${u8()}${u8()}`;
 }
 
 function u32() {
-    return (Math.round(Math.random() * 0xFF_FF_FF_FF)).toString(16);
+    return `${u16()}${u16()}`;;
 }
 
 function u64() {
@@ -52,12 +60,31 @@ function u4096() {
 
 function hex(x) {
     try {
-        console.log(`RandomHex[\`u${x}\`]()`)
         return RandomHex[`u${x}`]();
     }
     catch (e) {
-        console.log(e.toString());
+        let result = "";
+
+        let i = 0;
+
+        // 8-bit-aligned:
+        for (
+            i = i;
+            i < x;
+            i += 8
+        ) {
+            result += u8();
+        }
+
+        return result;
     }
+}
+
+function buffer(x) {
+    return Buffer.from(
+        hex(x),
+        'hex'
+    );
 }
 
 function int(x) {
@@ -83,9 +110,12 @@ function hyperGatewayURL() {
 }
 
 const RandomHex = {
+    buffer,
     int,
     float,
     hex,
+    hyperURL,
+    hyperGatewayURL,
     u1,
     u2,
     u4,
@@ -102,18 +132,3 @@ const RandomHex = {
 };
 
 module.exports = RandomHex;
-
-console.log(hex(64));
-console.log(hex(256));
-console.log(int(4).toString(16));
-console.log(int(4));
-console.log(float(8).toString(16));
-console.log(float(8));
-console.log(2 / 8, 'bytes');
-
-console.log(
-    Number.parseInt(
-        '1000',
-        16
-    )
-);
